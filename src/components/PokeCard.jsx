@@ -81,6 +81,11 @@ export default function PokeCard(props) {
           return <TypeCard key={typeIndex} type={typeObject?.type?.name} />;
         })}
       </div>
+      <img
+        className="default-img"
+        src={"/pokemon/" + getFullPokedexNumber(selectedPokemon) + ".png"}
+        alt={`${name}-large-img`}
+      />
     </div>
   );
 }
