@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Modal from "./Modal";
+
 import {
   first151Pokemon,
   getFullPokedexNumber,
@@ -77,6 +79,16 @@ export default function PokeCard(props) {
 
   return (
     <div className="poke-card">
+      <Modal handleCloseModal={() => {}}>
+        <div>
+          <h6>Name</h6>
+          <h2></h2>
+        </div>
+        <div>
+          <h6>Description</h6>
+          <p>aawdaw</p>
+        </div>
+      </Modal>
       <div>
         <h4>#{getFullPokedexNumber(selectedPokemon)}</h4>
         <h2>{name}</h2>
