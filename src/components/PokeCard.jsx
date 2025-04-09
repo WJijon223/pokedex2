@@ -13,14 +13,9 @@ export default function PokeCard(props) {
 
   const { name, height, abilities, stats, types, moves, sprites } = data || {};
 
+  console.log(stats);
   const imgList = Object.keys(sprites || {}).filter((val) => {
-    if (!sprites[val]) {
-      return false;
-    }
-    if (["versions", "other"].includes(val)) {
-      return false;
-    }
-    return true;
+    return sprites[val] && !["versions", "other"].includes(val);
   });
 
   useEffect(() => {
@@ -105,6 +100,18 @@ export default function PokeCard(props) {
               src={imgUrl}
               alt={`${name}-img-${spriteUrl}`}
             />
+          );
+        })}
+      </div>
+      <h3>Stats</h3>
+      <div className="stats-card">
+        {stats.map((statObj, statIndex) => {
+          const { stat, base_stat } = statObj;
+          return (
+            <div key={statIndex} className="stat-item">
+              <p>{stat?.name.replaceAll("-", " ")}</p>
+              <h4>{base_stat}</h4>
+            </div>
           );
         })}
       </div>
