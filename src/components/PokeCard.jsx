@@ -13,6 +13,16 @@ export default function PokeCard(props) {
 
   const { name, height, abilities, stats, types, moves, sprites } = data || {};
 
+  const imgList = Object.keys(sprites || {}).filter((val) => {
+    if (!sprites[val]) {
+      return false;
+    }
+    if (["versions", "other"].includes(val)) {
+      return false;
+    }
+    return true;
+  });
+
   useEffect(() => {
     // if loading or no access to localStorage, exit logic
     if (loading || !localStorage) {
@@ -86,6 +96,18 @@ export default function PokeCard(props) {
         src={"/pokemon/" + getFullPokedexNumber(selectedPokemon) + ".png"}
         alt={`${name}-large-img`}
       />
+      <div className="img-container">
+        {imgList.map((spriteUrl, spriteIndex) => {
+          const imgUrl = sprites[spriteUrl];
+          return (
+            <img
+              key={spriteIndex}
+              src={imgUrl}
+              alt={`${name}-img-${spriteUrl}`}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
