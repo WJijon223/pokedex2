@@ -17,7 +17,6 @@ export default function PokeCard(props) {
 
   const { name, height, abilities, stats, types, moves, sprites } = data || {};
 
-  console.log(stats);
   const imgList = Object.keys(sprites || {}).filter((val) => {
     return sprites[val] && !["versions", "other"].includes(val);
   });
@@ -50,12 +49,14 @@ export default function PokeCard(props) {
 
       const skillData = {
         name: move,
-        description,
+        description: description,
       };
 
       setSkill(skillData);
       c[move] = skillData;
       localStorage.setItem("pokemon-moves", JSON.stringify(c));
+      // console.log(skill);
+      console.log(skillData);
     } catch (error) {
       console.log(error);
     } finally {
@@ -132,11 +133,12 @@ export default function PokeCard(props) {
         >
           <div>
             <h6>Name</h6>
+            <h2 className="skill-name">{skill.name.replaceAll("-", " ")}</h2>
             <h2></h2>
           </div>
           <div>
             <h6>Description</h6>
-            <p>aawdaw</p>
+            <p>{skill.description}</p>
           </div>
         </Modal>
       )}
