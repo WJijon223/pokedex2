@@ -42,7 +42,7 @@ export default function PokeCard(props) {
     try {
       setLoadingSkill(true);
       const res = await fetch(moveUrl);
-      const moveData = res.json();
+      const moveData = await res.json();
       console.log(`fetched move from API`, moveData);
       const description = moveData?.flavor_text_entries.filter((val) => {
         return val.version_group.name == "firered-leafgreen";
@@ -59,7 +59,7 @@ export default function PokeCard(props) {
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false);
+      setLoadingSkill(false);
     }
   }
 
@@ -185,7 +185,9 @@ export default function PokeCard(props) {
             <button
               className="btn-card pokemon-move"
               key={moveIndex}
-              onClick={() => {}}
+              onClick={() => {
+                fetchMoveData(moveObj?.move?.name, moveObj?.move?.url);
+              }}
             >
               <p>{moveObj?.move?.name.replaceAll("-", " ")}</p>
             </button>
